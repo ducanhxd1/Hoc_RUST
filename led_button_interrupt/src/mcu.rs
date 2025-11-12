@@ -12,21 +12,20 @@ pub const SPI3_BASE: u32 = APB1_BASE + 0x3C00;
 
 pub const USART2_BASE: u32 = APB1_BASE + 0x4400;
 pub const USART3_BASE: u32 = APB1_BASE + 0x4800;
-pub const UART4_BASE: u32 =  APB1_BASE + 0x4C00;
-pub const UART5_BASE: u32 =  APB1_BASE + 0x5000;
+pub const UART4_BASE: u32 = APB1_BASE + 0x4C00;
+pub const UART5_BASE: u32 = APB1_BASE + 0x5000;
 
-pub const I2C1_BASE: u32 =  APB1_BASE + 0x5400;
-pub const I2C2_BASE: u32 =  APB1_BASE + 0x5800;
-
+pub const I2C1_BASE: u32 = APB1_BASE + 0x5400;
+pub const I2C2_BASE: u32 = APB1_BASE + 0x5800;
 
 // APB2_BASE
 pub const APB2_BASE: u32 = 0x4001_0000;
-pub const SYSCFG_BASE: u32 = APB2_BASE; // AFIO BASE
+pub const AFIO_BASE: u32 = APB2_BASE; // AFIO BASE SYSCFG_BASE
 pub const EXTI_BASE: u32 = APB2_BASE + 0x0400;
 
 pub const GPIOA_BASE: u32 = APB2_BASE + 0x0800;
 pub const GPIOB_BASE: u32 = APB2_BASE + 0x0C00;
-pub const GPIOC_BASE: u32 = APB2_BASE + 0x1000; 
+pub const GPIOC_BASE: u32 = APB2_BASE + 0x1000;
 pub const GPIOD_BASE: u32 = APB2_BASE + 0x1400;
 pub const GPIOE_BASE: u32 = APB2_BASE + 0x1800;
 pub const GPIOF_BASE: u32 = APB2_BASE + 0x1C00;
@@ -43,11 +42,9 @@ pub const SPI1_BASE: u32 = APB2_BASE + 0x3000;
 
 pub const USART1_BASE: u32 = APB2_BASE + 0x3800;
 
-// AHB 
+// AHB
 pub const AHB_BASE: u32 = 0x4001_8000;
 pub const RCC_BASE: u32 = 0x4002_1000;
-
-
 
 pub const GPIO_PIN_0: u32 = 0;
 pub const GPIO_PIN_1: u32 = 1;
@@ -64,8 +61,9 @@ pub const GPIO_PIN_11: u32 = 11;
 pub const GPIO_PIN_12: u32 = 12;
 pub const GPIO_PIN_13: u32 = 13;
 pub const GPIO_PIN_14: u32 = 14;
+pub const GPIO_PIN_15: u32 = 15;
 
-// STM32F103
+// STM32F103 
 
 #[allow(non_camel_case_types)]
 

@@ -17,7 +17,8 @@ use crate::reg::*;
 pub fn enable_gpio_clock(port: u32) {
     // 0x18 offset
     let rcc_apb2enr_addr = (RCC_BASE + 0x18) as *mut u32;
-    
+
+
     match port {
         GPIOA_BASE => {
             //enable the 2th bit  of rcc_apb2enr_addr
@@ -40,6 +41,9 @@ pub fn enable_gpio_clock(port: u32) {
             reg_set_bit(rcc_apb2enr_addr, 6, true);
         }
 
+        AFIO_BASE => {
+            reg_set_bit(rcc_apb2enr_addr, 0, true);
+        }
         _ => {} // //catch all pattern, do nothing for values other than GPIOA_BASE
     }
 }
@@ -48,7 +52,7 @@ pub enum GpioMode {
     InputAnalog,
     InputFloating,
     InputPullUpDown,
-    OutputPushPull(u8),      // tốc độ: 10, 2, 50 MHz
+    OutputPushPull(u8), // tốc độ: 10, 2, 50 MHz
     OutputOpenDrain(u8),
     AltPushPull(u8),
     AltOpenDrain(u8),
@@ -61,7 +65,7 @@ pub fn set_gpio_mode(port: u32, pin: u32, mode: GpioMode) {
     let (reg_offset, bit_position) = if pin < 8 {
         (0x00, pin * 4)
     } else {
-        (0x04, (pin -8)*4)
+        (0x04, (pin - 8) * 4)
     };
 
     let gpio_mode_reg_addr = (port + reg_offset) as *mut u32;
@@ -102,7 +106,7 @@ pub fn set_gpio_pin_state(port: u32, pin: u32, pin_state: PinState) {
     match pin_state {
         PinState::High => {
             reg_set_val(gpio_bsrr_addr, 1 << pin);
-        } 
+        }
 
         PinState::Low => {
             reg_set_val(gpio_bsrr_addr, 1 << (pin + 16));
@@ -111,7 +115,7 @@ pub fn set_gpio_pin_state(port: u32, pin: u32, pin_state: PinState) {
         PinState::Toggle => {
             let gpio_odr_addr = (port + 0x0C) as *mut u32;
             if reg_read_bit(gpio_odr_addr, pin) {
-                reg_set_val(gpio_bsrr_addr , 1 << (pin + 16));
+                reg_set_val(gpio_bsrr_addr, 1 << (pin + 16));
             } else {
                 reg_set_val(gpio_bsrr_addr, 1 << pin);
             }

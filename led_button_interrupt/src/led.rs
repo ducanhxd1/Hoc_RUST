@@ -37,10 +37,10 @@ pub fn led_on(port: u32, pin: u32) {
     set_gpio_pin_state(port, pin, PinState::High);
 }
 
-pub fn _led_off(port: u32, pin: u32) {
+pub fn led_off(port: u32, pin: u32) {
     set_gpio_pin_state(port, pin, PinState::Low);
 }
 
-pub fn _led_toggle(port: u32, pin: u32) {
+pub fn led_toggle(port: u32, pin: u32) {
     set_gpio_pin_state(port, pin, PinState::Toggle);
 }

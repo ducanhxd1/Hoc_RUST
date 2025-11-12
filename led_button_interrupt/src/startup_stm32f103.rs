@@ -1,8 +1,7 @@
-
 // Steps write startup for stm32f103 ARM Cortex M3
 /*
  * 1. Define the vector table for mcu
- * 2. Define the reset handler  
+ * 2. Define the reset handler
  * 3/ Define the exception handlers
 */
 use core::ptr;
@@ -10,13 +9,19 @@ use core::ptr;
 // 1. Define the vector table for mcu
 
 #[unsafe(no_mangle)]
-extern "C" fn HardFault_Handler() { loop {} }
+extern "C" fn HardFault_Handler() {
+    loop {}
+}
 #[unsafe(no_mangle)]
-extern "C" fn NMI_Handler() { loop {} }
+extern "C" fn NMI_Handler() {
+    loop {}
+}
 // #[unsafe(no_mangle)]
 // extern "C" fn Reset_Handler() { loop {} }
 #[unsafe(no_mangle)]
-extern "C" fn Default_Handler() { loop {} }
+extern "C" fn Default_Handler() {
+    loop {}
+}
 
 unsafe extern "C" {
     unsafe fn BusFault_Handler();
@@ -85,8 +90,6 @@ unsafe extern "C" {
     unsafe fn USB_LP_CAN_RX0_Handler();
     unsafe fn WWDG_Handler();
 }
-
-
 
 #[used]
 #[unsafe(link_section = ".isr_vector")]
@@ -170,22 +173,21 @@ static VECTOR_TABLE: [Option<unsafe extern "C" fn()>; 75] = [
 
 // #[allow(missing_abi)]
 unsafe extern "C" {
-     static _sidata: u32; /* start of .data section in flash */
-     static mut _sdata: u32;  /* start of .data section in RAM */
-     static mut _edata: u32;  /* end of .data section in RAM */
-     static mut _sbss: u32;   /* start of .bss  in RAM */
-     static mut _ebss: u32;   /* end of .bss  in RAM */
+    static _sidata: u32; /* start of .data section in flash */
+    static mut _sdata: u32; /* start of .data section in RAM */
+    static mut _edata: u32; /* end of .data section in RAM */
+    static mut _sbss: u32; /* start of .bss  in RAM */
+    static mut _ebss: u32; /* end of .bss  in RAM */
 }
 
-// 2. Define the reset handler  
+// 2. Define the reset handler
 #[unsafe(no_mangle)]
 extern "C" fn Reset_Handler() {
-
     // 1. Copy the .data section from FLASH to RAM
 
     // reference of static variable to C like raw pointer
 
-    // Sử dụng core::ptr thư viện 
+    // Sử dụng core::ptr thư viện
     unsafe {
         let mut src_is_flash = ptr::addr_of!(_sidata);
         let mut dest_in_ram = ptr::addr_of_mut!(_sdata);
@@ -206,7 +208,7 @@ extern "C" fn Reset_Handler() {
             bss = bss.add(1);
         }
     }
-        
-    // 3. call main() 
-    crate::main(); 
-} 
+
+    // 3. call main()
+    crate::main();
+}
