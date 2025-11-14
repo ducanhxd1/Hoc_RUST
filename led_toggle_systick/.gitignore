@@ -1,0 +1,5 @@
+/target
+/.cargo
+/.vscode
+/device_STM32F103.x
+/memory.ld
